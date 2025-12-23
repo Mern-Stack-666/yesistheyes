@@ -67,7 +67,7 @@ export default function HowItWorks() {
                     {/* Steps Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4">
                         {steps.map((step, index) => {
-                            const colorClasses = {
+                            const colorMap = {
                                 teal: {
                                     glow: 'bg-teal-500/20',
                                     border: 'group-hover:border-teal-500/30',
@@ -108,7 +108,10 @@ export default function HowItWorks() {
                                     gradient: 'group-hover:from-emerald-600 group-hover:to-emerald-400',
                                     progress: 'bg-emerald-500'
                                 }
-                            }[step.color];
+                            };
+
+                            const colorClasses = colorMap[step.color as keyof typeof colorMap];
+                            if (!colorClasses) return null;
 
                             return (
                                 <div
